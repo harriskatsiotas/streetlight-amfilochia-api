@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Query, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Optional
 from datetime import datetime, timezone
 
@@ -6,6 +7,13 @@ app = FastAPI(
     title="Luminaires API – Δήμος Αμφιλοχίας",
     description="Geolocation and real-time status for 100 street luminaires in Amfilochia.",
     version="1.0.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # επιτρέπει όλα τα origins
+    allow_methods=["GET"], # μόνο GET (read-only API)
+    allow_headers=["*"],
 )
 
 # ---------------------------------------------------------------------------
